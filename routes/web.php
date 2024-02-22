@@ -19,7 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PrincipalController::class, 'principal']);
 
 
-Route::get("/sobre-nos", [SobreNosController::class, "sobrenos"]);
+Route::get('/sobre-nos', [SobreNosController::class, 'sobrenos']);
 
 
 Route::get("/contato", [ContatoController::class, "contato"]);
+
+Route::get(
+    '/contato/{nome}/{categoria_id?}',
+    function (string $nome, ?int $categoria_id = null) {
+        echo $nome . '' . $categoria_id;
+    }
+)->where('categoria_id', '[0-9]+')->where('nome', '[A-Za-z]+');
