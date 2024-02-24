@@ -16,17 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PrincipalController::class, 'principal']);
+//index routes
+require_once('app/indexRoutes.php');
 
+//app routes
+require_once('app/appRoutes.php');
 
-Route::get('/sobre-nos', [SobreNosController::class, 'sobrenos']);
-
-
-Route::get("/contato", [ContatoController::class, "contato"]);
-
-Route::get(
-    '/contato/{nome}/{categoria_id?}',
-    function (string $nome, ?int $categoria_id = null) {
-        echo $nome . '' . $categoria_id;
-    }
-)->where('categoria_id', '[0-9]+')->where('nome', '[A-Za-z]+');
+Route::fallback(function () {
+    echo "Fallback Route <br>Redirect to <a href=" . route('index') . ">Home</a>";
+});

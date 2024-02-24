@@ -1,1 +1,0 @@
-<h3>Hello World Principal (View)</h3>
