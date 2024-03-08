@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\LogAcesso;
 use Symfony\Component\HttpFoundation\Response;
 
 class LogAcessoMiddleware
@@ -15,6 +16,10 @@ class LogAcessoMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // return $next($request);
+        $ip = $request->server->get('REMOTE_ADDR');
+        $rota = $request->getRequestUri();
+        LogAcesso::create(['log' => "Ip $ip requisitou a rota $rota"]);
         return $next($request);
     }
 }

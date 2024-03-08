@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -14,5 +14,6 @@ Route::prefix('/')->group(function () {
   Route::get("/contato", [ContatoController::class, 'contato'])->name('site.contato');
   Route::post("/contato", [ContatoController::class, 'salvar'])->name('site.contato');
 
-  Route::get("/login", [ContatoController::class, 'contato'])->name('site.login');
+  Route::get("/login", [LoginController::class, 'index'])->name('site.login');
+  Route::post("/login", [LoginController::class, 'autenticar'])->name('site.login');
 });
