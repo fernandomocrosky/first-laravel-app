@@ -22,6 +22,9 @@
                 @endif
                 <button type="submit"class='borda-preta'> Acessar </button>
             </form>
+            @if (isset($erro) && $erro != '')
+                <span class="form-errors">{{ $erro }}</span>
+            @endif
         </div>
     </div>
     </div>

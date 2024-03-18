@@ -15,12 +15,11 @@ class AutenticacaoMiddleware
      */
     public function handle(Request $request, Closure $next, $metodo_autenticacao, $perfil): Response
     {
-        if ($metodo_autenticacao == 'padrao') {
-            echo 'Verificar o usuário no banco de dados';
+        session_start();
+
+        if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
+            return $next($request);
         }
-        if ($metodo_autenticacao == 'idap') {
-            echo 'Verificar o usuário e senha';
-        }
-        return Response('Acesso negado rota exige autenticação');
+        return redirect()->route('site.login', ['erro' => 2]);
     }
 }
